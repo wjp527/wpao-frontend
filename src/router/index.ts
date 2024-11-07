@@ -12,12 +12,44 @@ const router = createRouter({
     {
       path: '/team',
       name: 'Team',
-      component: () => import('../pages/Team/Team.vue')
+      component: () => import('../pages/Team/Team.vue'),
+      // children: [
+      //   {
+      //     path: 'add',
+      //     name: 'TeamAdd',
+      //     component: () => import('../pages/Team/Add.vue')
+      //   },
+      // ]
+    },
+    {
+      path: '/team/add',
+      name: 'TeamAdd',
+      component: () => import('../pages/Team/Add.vue')
+    },
+    {
+      path: '/team/update',
+      name: 'TeamUpdate',
+      component: () => import('../pages/Team/Update.vue')
     },
     {
       path: '/user',
       name: 'User',
       component: () => import('../pages/User/User.vue')
+    },
+    {
+      path: '/user/update',
+      name: 'UserUpdate',
+      component: () => import('../pages/User/UserUpdate.vue')
+    },
+    {
+      path: '/user/team/create',
+      name: 'UserTeamCreate',
+      component: () => import('../pages/User/UserTeamCreate.vue')
+    },
+    {
+      path: '/user/team/join',
+      name: 'UserTeamJoin',
+      component: () => import('../pages/User/UserTeamJoin.vue')
     },
     {
       path: '/search',
@@ -27,7 +59,7 @@ const router = createRouter({
     {
       path: '/edit',
       name: 'Edit',
-      component: () => import('../pages/User/Edit.vue')
+      component: () => import('../pages/User/UserEdit.vue')
     },
     {
       path: '/searchresult',

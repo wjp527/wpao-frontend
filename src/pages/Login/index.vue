@@ -1,5 +1,6 @@
 <template>
-  <div class="Login">
+  <div class="Login"> 
+    <Loading color="#1989fa" v-show="loading" />
     <van-form @submit="onSubmit">
       <van-cell-group inset>
         <van-field v-model="userAccount" name="账号" label="用户名" placeholder="用户名" :rules="[{ required: true, message: '请输入账号' }]" />
@@ -26,20 +27,27 @@ globalStore.GlobalNavBarTitle = '登录'
 
 const userAccount = ref('')
 const userPassword = ref('')
+
+// 加载中
+const loading = ref(false)
 const onSubmit = async (values: any) => {
+  loading.value = true
   let res = await userStore.GetUserLoginAysnc({
     userAccount: userAccount.value,
     userPassword: userPassword.value,
   })
-
+ 
   if(res === 200) {
     showToast('登录成功')
+    loading.value = false
     router.replace('/')
   } else {
     showToast('用户名或密码错误')
   }
 
 }
+
+
  
 </script>
 

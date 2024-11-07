@@ -11,10 +11,11 @@ import router from './router'
 import store from './store'
 
 import Loading from './components/Loading/index.vue'
-
+import { Toast } from 'vant';
 
 const app = createApp(App)
 app.component('Loading', Loading)
 app.use(router)
 app.use(store)
+app.use(Toast);
 app.mount('#app')

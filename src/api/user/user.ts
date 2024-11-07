@@ -1,4 +1,4 @@
-import request from "../utils/request";
+import request from "../../utils/request";
 
 // 根据标签搜索用户
 export const SearchTagsAsync = (tagNameList: any) => {
