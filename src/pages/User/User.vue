@@ -30,7 +30,7 @@ import { useUserStore } from '../../store/user'
 import { useGlobalStore } from '../../store/global'
 import { showToast } from 'vant'
 import { showImagePreview } from 'vant'
-const router = useRouter()
+const router = useRouter() 
 const userStore: any = useUserStore()
 const globalStore = useGlobalStore()
 globalStore.GlobalNavBarTitle = '个人中心'
@@ -76,6 +76,7 @@ const preview = (url: string) => {
   showImagePreview([url])
   // showImagePreview(['https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg']);
 }
+ 
 onMounted(() => {
   init()
 })

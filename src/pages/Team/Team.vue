@@ -14,10 +14,10 @@
             <div>过期: {{ item.expireTime }}</div>
           </template>
           <template #footer>
-            <van-button type="primary" size="mini" :disabled="item.maxNum == item.joinNum" @click="joinTeam(item)">加入队伍</van-button>
-            <van-button type="primary" size="mini" v-if="item.userId == userInfo?.id" @click="uploadTeam(item)">更新队伍</van-button>
-            <van-button type="primary" size="mini"  @click="QuitTeam(item)">退出队伍</van-button>
-            <van-button type="primary" size="mini"  v-if="item.userId == userInfo?.id"   @click="DissolveTeam(item)">解散队伍</van-button>
+            <van-button type="primary" size="mini" :disabled="item.maxNum == item.joinNum" @click="joinTeam(item)"  >加入队伍</van-button>
+            <van-button type="primary" size="mini" v-if="item.userId == userInfo?.id && item.hasJoin == true" @click="uploadTeam(item)">更新队伍</van-button>
+            <van-button type="primary" size="mini"  >退出队伍</van-button>
+            <van-button type="primary" size="mini" v-if="item.userId == userInfo?.id" @click="DissolveTeam(item)">解散队伍</van-button>
           </template>
         </van-card>
       </van-tab>
@@ -31,26 +31,25 @@
             <div>过期: {{ item.expireTime }}</div>
           </template>
           <template #footer>
-            <van-button type="primary" size="mini" v-if="item.userId == userInfo.id" @click="uploadTeam(item)">更新</van-button>
-            <van-button type="primary" size="mini" :disabled="item.maxNum == item.joinNum" @click="joinTeam(item)">加入队伍</van-button>
+            <van-button type="primary" size="mini" :disabled="item.maxNum == item.joinNum" @click="joinTeam(item)" v-if="item.userId != userInfo?.id && item.hasJoin == false">加入队伍</van-button>
+            <van-button type="primary" size="mini" v-if="item.userId == userInfo?.id && item.hasJoin == true" @click="uploadTeam(item)">更新队伍</van-button>
+            <van-button type="primary" size="mini" v-if="item.hasJoin == true" @click="QuitTeam(item)">退出队伍</van-button>
+            <van-button type="primary" size="mini" v-if="item.userId == userInfo?.id" @click="DissolveTeam(item)">解散队伍</van-button>
           </template>
         </van-card>
       </van-tab>
     </van-tabs>
 
-    <van-popup v-model:show="showCenter" round :style="{ padding: '10px' }">
-      <van-form @submit="onSubmit">
+    <van-dialog v-model:show="showCenter" title="请输入密码" show-cancel-button @open="open" @confirm="onSubmit">
+      <van-form >
         <van-cell-group inset>
-          <van-field v-model="password" name="password" label="密码" placeholder="请填写加密密码" :rules="[{ required: true, message: '请填写加密密码' }]" />
+          <van-field type="password" v-model="password" name="password" label="密码" placeholder="请填写加密密码" :rules="[{ required: true, message: '请填写加密密码' }]" />
         </van-cell-group>
-
-        <div style="margin: 16px">
-          <van-button round block type="primary" native-type="submit"> 提交 </van-button>
-        </div>
+ 
       </van-form>
-    </van-popup>
+    </van-dialog>
 
-    <van-floating-bubble v-model:offset="offset" icon="plus" @click="onClick" axis="xy" magnetic="x" />
+    <van-floating-bubble v-model="offset" icon="plus" @click="onClick" axis="xy" magnetic="x" />
   </div>
 </template>
 <script lang="ts" setup name="Team">
@@ -60,16 +59,15 @@ import { useGlobalStore } from '../../store/global'
 const globalStore = useGlobalStore()
 globalStore.GlobalNavBarTitle = '队伍'
 
-import { storeToRefs } from 'pinia';
-import { useUserStore } from '../../store/user';
+import { storeToRefs } from 'pinia'
+import { useUserStore } from '../../store/user'
 import { useTeamStore } from '../../store/team'
 const userStore = useUserStore()
 const teamStore = useTeamStore()
 
 const { userInfo } = storeToRefs(userStore)
 import router from '../../router'
-import { showToast } from 'vant'
-
+import { showToast, Toast } from 'vant'
 
 // 加载中
 const loading = ref(true)
@@ -86,6 +84,7 @@ const onSearch = async (val: string) => {
       searchText: val,
     })
     if (res == 200) {
+      // 只截取4位数据
       teamListByPublic.value = teamStore.selectTeamList
     } else {
       showToast(res)
@@ -93,7 +92,7 @@ const onSearch = async (val: string) => {
   } else {
     let res = await teamStore.GetSelectTeamAsync({
       searchText: val,
-      teamStatus: 2
+      teamStatus: 2,
     })
     if (res == 200) {
       teamListSecret.value = teamStore.selectTeamList
@@ -156,9 +155,9 @@ const uploadTeam = (item: any) => {
 
 // 退出队伍
 const QuitTeam = async (item: any) => {
-  console.log(item);
+  console.log(item)
   let res = await teamStore.GetQuitTeamAsync({
-    teamId: item.id
+    teamId: item.id,
   })
   if (res == 200) {
     showToast('退出成功')
@@ -170,17 +169,16 @@ const QuitTeam = async (item: any) => {
 }
 // 解散队伍
 const DissolveTeam = async (item: any) => {
-  const res =await teamStore.GetDissolveTeamAsync({
-    id: item.id
+  const res = await teamStore.GetDissolveTeamAsync({
+    id: item.id,
   })
   if (res == 200) {
-    showToast('解散成功') 
+    showToast('解散成功')
     initPublic()
     initSercet()
   } else {
     showToast(res)
   }
-
 }
 // 加入队伍
 let sercetObj: any = ref({})
@@ -207,9 +205,10 @@ const joinTeam = async (item: any) => {
 
 const showCenter = ref(false)
 const password = ref('')
-const onSubmit = async () => {
-  // showCenter.value = false
-
+const open = () => {
+  password.value = ''
+}
+const onSubmit = async () => { 
   let res: any = await teamStore.GetJoinTeamAsync({
     teamId: sercetObj.value.id,
     password: password.value,
@@ -220,6 +219,7 @@ const onSubmit = async () => {
     // 加密
     initSercet()
   } else {
+    // showCenter.value = true
     showToast(res)
   }
 }

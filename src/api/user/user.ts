@@ -72,3 +72,12 @@ export const recommendUsersAsync = (payload: any) => {
     data: payload
   });
 };
+
+// 匹配用户接口 matchUsers  /api/user/match
+export const matchUsersAsync = (payload: any) => {
+  return request({
+    url: "/user/match",
+    method: 'POST',
+    data: payload
+  });
+};

@@ -16,18 +16,20 @@
 import { ref } from 'vue'
 import { showToast } from 'vant'
 
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { useUserStore } from '../../store/user'
 import { useGlobalStore } from '../../store/global'
 const router = useRouter()
+const route = useRoute()
 const userStore = useUserStore()
+
 
 const globalStore = useGlobalStore()
 globalStore.GlobalNavBarTitle = '登录'
 
 const userAccount = ref('')
-const userPassword = ref('')
-
+const userPassword = ref('') 
+console.log(route.query?.redirect);
 // 加载中
 const loading = ref(false)
 const onSubmit = async (values: any) => {
@@ -39,9 +41,13 @@ const onSubmit = async (values: any) => {
  
   if(res === 200) {
     showToast('登录成功')
+    // 跳转到用户没登陆之前的页面
+    const redirectUrl = route.query?.redirect as string ?? '/'
     loading.value = false
-    router.replace('/')
+    window.location.href = redirectUrl
+    
   } else {
+    loading.value = false
     showToast('用户名或密码错误')
   }
 

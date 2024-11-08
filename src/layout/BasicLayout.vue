@@ -18,7 +18,7 @@
   </div>
 </template>
 <script lang="ts" setup name="Tabbar">
-import { ref, watch } from 'vue' 
+import { ref } from 'vue' 
 import { useRouter } from 'vue-router'
 import { useGlobalStore } from '../store/global';
 const router = useRouter()
@@ -41,4 +41,14 @@ const onClickRight = () => {
 }
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.Tabbar {
+  position: fixed;
+  bottom: 100px;
+  left: 0;
+}
+
+.content {
+  height: calc(100vh - 100px);
+}
+</style>

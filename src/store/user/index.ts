@@ -1,7 +1,11 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
-import { userLogin, SearchTagsAsync, getCurrentUserAsync, userUserListUpdateAsync, userUploadFileAsync, userLogoutAsync, recommendUsersAsync } from "../../api/user/user.ts";
+import {
+  userLogin, SearchTagsAsync, getCurrentUserAsync, userUserListUpdateAsync, userUploadFileAsync, userLogoutAsync, recommendUsersAsync,
+  // 匹配用户接口 
+  matchUsersAsync
+} from "../../api/user/user.ts";
 
 // 请求体返回类型参数
 import type { BaserResponse } from "../type/index.ts";
@@ -36,7 +40,7 @@ export const useUserStore = defineStore("user",
 
 
     // 获取当前用户信息
-    const userInfo = ref<BaserResponse>()
+    const userInfo: any = ref<BaserResponse>()
     const GetCurrentUserAsync = async () => {
       let res: BaserResponse = await getCurrentUserAsync()
       if (res.code === 0) {
@@ -95,6 +99,20 @@ export const useUserStore = defineStore("user",
       }
     }
 
+
+    // 匹配用户接口 
+    // matchUsersAsync 
+    const GetMatchUsersAsync = async (payload: any) => {
+      let res: BaserResponse = await matchUsersAsync(payload)
+      if (res.code === 0) {
+        recommendUsers.value = res.data
+        return 200
+      } else {
+        return res.description
+      }
+    }
+
+
     return {
       // 用户登录
       loginInfo,
@@ -122,6 +140,9 @@ export const useUserStore = defineStore("user",
       // 推荐用户数据接口
       recommendUsers,
       GetRecommendUsersAsync,
+
+      // 匹配用户接口 
+      GetMatchUsersAsync
 
 
 
