@@ -14,9 +14,9 @@
             <div>过期: {{ item.expireTime }}</div>
           </template>
           <template #footer>
-            <van-button type="primary" size="mini" :disabled="item.maxNum == item.joinNum" @click="joinTeam(item)"  >加入队伍</van-button>
+            <van-button type="primary" size="mini" :disabled="item.maxNum == item.joinNum" @click="joinTeam(item)" v-if="item.userId != userInfo?.id && item.hasJoin == false">加入队伍</van-button>
             <van-button type="primary" size="mini" v-if="item.userId == userInfo?.id && item.hasJoin == true" @click="uploadTeam(item)">更新队伍</van-button>
-            <van-button type="primary" size="mini"  >退出队伍</van-button>
+            <van-button type="primary" size="mini" v-if="item.hasJoin == true" @click="QuitTeam(item)">退出队伍</van-button>
             <van-button type="primary" size="mini" v-if="item.userId == userInfo?.id" @click="DissolveTeam(item)">解散队伍</van-button>
           </template>
         </van-card>
@@ -55,13 +55,13 @@
 <script lang="ts" setup name="Team">
 import { onMounted, ref } from 'vue'
 
-import { useGlobalStore } from '../../store/global'
+import { useGlobalStore } from '../../store/Global'
 const globalStore = useGlobalStore()
 globalStore.GlobalNavBarTitle = '队伍'
 
 import { storeToRefs } from 'pinia'
-import { useUserStore } from '../../store/user'
-import { useTeamStore } from '../../store/team'
+import { useUserStore } from '../../store/User'
+import { useTeamStore } from '../../store/Team'
 const userStore = useUserStore()
 const teamStore = useTeamStore()
 

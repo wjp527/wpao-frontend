@@ -49,14 +49,14 @@
 <script lang="ts" setup name="TeamAdd">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useGlobalStore } from '../../store/global'
+import { useGlobalStore } from '../../store/Global'
 const globalStore = useGlobalStore()
 globalStore.GlobalNavBarTitle = '添加队伍'
 
-import { useUserStore } from '../../store/user'
+import { useUserStore } from '../../store/User'
 import { showToast } from 'vant'
 
-import { useTeamStore } from '../../store/team'
+import { useTeamStore } from '../../store/Team'
 const teamStore: any = useTeamStore()
 const userStore: any = useUserStore()
 const router = useRouter()

@@ -1,5 +1,6 @@
 <template>
   <div class="Edit">
+    
     <van-form @submit="onSubmit">
       <van-cell-group inset>
         <!-- 文件上传 -->
@@ -9,20 +10,25 @@
           </template>
         </van-field>
 
+        <van-field v-else-if="editUser.editKey === 'gender'" name="gender" v-model="fieldValue" is-link readonly :label="editUser.editName" placeholder="选择性别" @click="showPicker = true" />
+
         <van-field v-else v-model="editUser.currentValue" :name="editUser.editKey" :label="editUser.editName" :placeholder="editUser.editName" :rules="[{ required: true, message: `请输入${editUser.editName}` }]" />
       </van-cell-group>
       <div style="margin: 16px">
         <van-button round block type="primary" native-type="submit"> 提交 </van-button>
       </div>
     </van-form>
-    
   </div>
+
+  <van-popup v-model:show="showPicker" round position="bottom">
+    <van-picker :columns="columns" @cancel="showPicker = false" @confirm="onConfirm" />
+  </van-popup>
 </template>
 <script lang="ts" setup name="Edit">
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useUserStore } from '../../store/user'
-import { useGlobalStore } from '../../store/global'
+import { useUserStore } from '../../store/User'
+import { useGlobalStore } from '../../store/Global'
 
 import { showToast } from 'vant'
 const route = useRoute()
@@ -40,7 +46,7 @@ const editUser: any = ref({
 })
 
 // 文件上传
-const fileValue:any = ref([])
+const fileValue: any = ref([])
 const init = async () => {
   let res = await userStore.GetCurrentUserAsync()
   if (res === 200) {
@@ -65,6 +71,23 @@ const afterRead = async (file: any) => {
   }
 }
 
+// 选择性别
+const columns = [
+  { text: '男', value: '0' },
+  { text: '女', value: '1' },
+]
+const fieldValue = ref('')
+const showPicker = ref(false) 
+fieldValue.value = editUser.value.currentValue == 0 ? '男' : '女'
+// editUser.currentValue = editUser.value.currentValue == 0 ? (fieldValue.value = '男') : (fieldValue.value = '女')
+ 
+
+const onConfirm = ({ selectedOptions }:any) => {
+  showPicker.value = false
+  fieldValue.value = selectedOptions[0].text 
+  editUser.currentValue = fieldValue.value 
+}
+
 // --------------------- 普通修改直接进入 ---------------------
 
 const onSubmit = async (submitValue: any) => {
@@ -79,14 +102,18 @@ const onSubmit = async (submitValue: any) => {
 
   submitValue.avatarUrl = userStore.userAvatarUrl || fileValue.value[0].url
 
+  if (editUser.value.editKey === 'gender') {
+    submitValue.gender = fieldValue.value == '男' ? 0 : 1
+  }
+
   let res: any = await userStore.GetUserUserListUpdateAsync({ ...submitValue, id: editUser.value.id })
   if (res === 200) {
     showToast('修改成功')
     setTimeout(() => {
       router.replace('/user')
     }, 500)
-  } else {
-    showToast(res.description)
+  } else {  
+    showToast(res)
   }
 }
 

@@ -1,6 +1,6 @@
-export type BaserResponse = {
+export type BaseResponse = {
   code?: number;
-  data?: any;
+  data?: any[];
   description?: string;
   message?: string;
-}
+} 

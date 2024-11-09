@@ -24,8 +24,8 @@
 <script lang="ts" setup name="Index">
 import { nextTick, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { useUserStore } from '../../store/user'
-import { useGlobalStore } from '../../store/global'
+import { useUserStore } from '../../store/User'
+import { useGlobalStore } from '../../store/Global'
 
 import UserCardList from '../../components/UserCardList/index.vue'
 

@@ -5,10 +5,10 @@
         <template #right-icon>
           <van-image :src="user.avatarUrl" width="50" hight="50" @click="editUser('avatarUrl', '用户头像', user.avatarUrl)"></van-image>
         </template>
-      </van-cell>
+      </van-cell> 
       <van-cell title="昵称" is-link :value="user.username" @click="editUser('username', '昵称', user.username)" />
       <van-cell title="账号" is-link :value="user.userAccount" @click="editUser('userAccount', '账号', user.userAccount)" />
-      <van-cell title="性别" is-link :value="user.gender" @click="editUser('gender', '性别', user.gender)" />
+      <van-cell title="性别" is-link :value="user.gender == 0 ? '男' : '女'" @click="editUser('gender', '性别', user.gender)" />
       <van-cell title="电话" is-link :value="user.phone" @click="editUser('phone', '电话', user.phone)" />
       <van-cell title="邮箱" is-link :value="user.email" @click="editUser('email', '邮箱', user.email)" />
       <van-cell title="星球编号" :value="user.planetCode" />
@@ -23,8 +23,8 @@
 <script lang="ts" setup name="UserUpdate">
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useUserStore } from '../../store/user'
-import { useGlobalStore } from '../../store/global'
+import { useUserStore } from '../../store/User'
+import { useGlobalStore } from '../../store/Global'
 import { showToast } from 'vant'
 const router = useRouter()
 const userStore: any = useUserStore()

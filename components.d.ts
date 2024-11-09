@@ -7,9 +7,15 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    Add: typeof import('./src/components/AddButton/add.vue')['default']
+    AddButton: typeof import('./src/components/AddButton/index.vue')['default']
+    Button: typeof import('./src/components/Button/index.vue')['default']
+    FirstTag: typeof import('./src/components/AddButton/FirstTag.vue')['default']
     Loading: typeof import('./src/components/Loading/index.vue')['default']
+    NavBar: typeof import('./src/components/NavBar/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SecondTag: typeof import('./src/components/AddButton/SecondTag.vue')['default']
     ToggleSwitche: typeof import('./src/components/ToggleSwitche/index.vue')['default']
     UserCardList: typeof import('./src/components/UserCardList/index.vue')['default']
     VanButton: typeof import('vant/es')['Button']
@@ -27,6 +33,7 @@ declare module 'vue' {
     VanIcon: typeof import('vant/es')['Icon']
     VanImage: typeof import('vant/es')['Image']
     VanNavBar: typeof import('vant/es')['NavBar']
+    VanPicker: typeof import('vant/es')['Picker']
     VanPopup: typeof import('vant/es')['Popup']
     VanRadio: typeof import('vant/es')['Radio']
     VanRadioGroup: typeof import('vant/es')['RadioGroup']
@@ -36,6 +43,7 @@ declare module 'vue' {
     VanSkeletonImage: typeof import('vant/es')['SkeletonImage']
     VanSkeletonParagraph: typeof import('vant/es')['SkeletonParagraph']
     VanStepper: typeof import('vant/es')['Stepper']
+    VanSticky: typeof import('vant/es')['Sticky']
     VanTab: typeof import('vant/es')['Tab']
     VanTabbar: typeof import('vant/es')['Tabbar']
     VanTabbarItem: typeof import('vant/es')['TabbarItem']

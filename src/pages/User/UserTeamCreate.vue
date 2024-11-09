@@ -18,8 +18,8 @@
 <script lang="ts" setup name="UserTeamCreate">
 import { onMounted, ref } from 'vue'
 
-import { useTeamStore } from '../../store/team'
-import { useUserStore } from '../../store/user'
+import { useTeamStore } from '../../store/Team'
+import { useUserStore } from '../../store/User'
 import { storeToRefs } from 'pinia'
 import { showToast } from 'vant'
 const teamStore = useTeamStore()

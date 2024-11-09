@@ -4,3 +4,8 @@ export interface BASE_RESPONSE {
   message: string;
   description: string;
 }
+
+export interface PAGEINFO {
+  pageNum: number;
+  pageSize: number;
+}

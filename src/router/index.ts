@@ -52,6 +52,11 @@ const router = createRouter({
       component: () => import('../pages/User/UserTeamJoin.vue')
     },
     {
+      path: '/user/userEditTags',
+      name: 'UserEditTags',
+      component: () => import('../pages/User/UserEditTags.vue')
+    },
+    {
       path: '/search',
       name: 'Search',
       component: () => import('../pages/Search/Search.vue')
@@ -71,7 +76,17 @@ const router = createRouter({
       path: '/login',
       name: 'Login',
       component: () => import('../pages/Login/index.vue')
-
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: () => import('../pages/Register/index.vue')
+    },
+    // 欢迎页
+    {
+      path: '/welcome',
+      name: 'Welcome',
+      component: () => import('../pages/Welcome/index.vue')
     }
   ]
 })

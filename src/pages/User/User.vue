@@ -1,5 +1,6 @@
 <template>
   <div class="User">
+    <pre>{{  }}</pre>
     <template v-if="user">
       <div class="top">
         <van-image round width="5rem" height="5rem" :src="user.avatarUrl" @click="preview(user.avatarUrl)" class="avatar" />
@@ -16,6 +17,7 @@
       <van-cell title="修改信息" to="/user/update" />
       <van-cell title="我创建的队伍" to="/user/team/create" />
       <van-cell title="我加入的队伍" to="/user/team/join" />
+      <van-cell title="更新标签"  v-show="user?.userRole == 1"  to="/user/userEditTags" />
     </van-cell-group>
 
     <div class="btn-group">
@@ -26,8 +28,8 @@
 <script lang="ts" setup name="User">
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useUserStore } from '../../store/user'
-import { useGlobalStore } from '../../store/global'
+import { useUserStore } from '../../store/User'
+import { useGlobalStore } from '../../store/Global'
 import { showToast } from 'vant'
 import { showImagePreview } from 'vant'
 const router = useRouter() 
@@ -36,19 +38,7 @@ const globalStore = useGlobalStore()
 globalStore.GlobalNavBarTitle = '个人中心'
 
 const user: any = ref()
-// 修改用户信息
-function editUser(editKey: string, editName: string, currentValue: string | number) {
-  router.push({
-    path: '/edit',
-    query: {
-      id: userStore.userInfo.id,
-      editKey,
-      editName,
-      currentValue,
-    },
-  })
-}
-
+ 
 // 获取当前用户信息
 const init = async () => {
   let res: any = await userStore.GetCurrentUserAsync()
