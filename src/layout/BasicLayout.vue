@@ -20,7 +20,7 @@
 <script lang="ts" setup name="Tabbar">
 import { ref } from 'vue' 
 import { useRouter } from 'vue-router'
-import { useGlobalStore } from '../store/global';
+import { useGlobalStore } from '../store/Global';
 const router = useRouter()
 const globalStore = useGlobalStore()
 

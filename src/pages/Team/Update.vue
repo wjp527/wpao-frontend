@@ -45,16 +45,16 @@
 <script lang="ts" setup name="TeamUpdate">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useGlobalStore } from '../../store/global'
+import { useGlobalStore } from '../../store/Global'
 const globalStore = useGlobalStore()
 globalStore.GlobalNavBarTitle = '更新队伍'
 
 import { storeToRefs } from 'pinia'
 
-import { useUserStore } from '../../store/user'
+import { useUserStore } from '../../store/User'
 import { showToast } from 'vant'
 
-import { useTeamStore } from '../../store/team'
+import { useTeamStore } from '../../store/Team'
 const teamStore: any = useTeamStore()
 const { updateTeam } = storeToRefs(teamStore)
 

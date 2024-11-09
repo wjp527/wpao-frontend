@@ -18,7 +18,7 @@
 <script lang="ts" setup name="UserTeamJoin">
 import { onMounted, ref } from 'vue'
 
-import { useTeamStore } from '../../store/team' 
+import { useTeamStore } from '../../store/Team' 
 import { showToast } from 'vant'
 const teamStore = useTeamStore() 
  

@@ -6,15 +6,19 @@
  
 
     <van-empty v-else-if="loading == false && userList.length === 0" class="empty" image="search" description="没有找到相关用户" />
-  </div>
+  </div> 
 </template>
 <script lang="ts" setup name="SearchResult">
 import { nextTick, onMounted, ref } from 'vue'
 import UserCardList from '../../components/UserCardList/index.vue'
 import { useRoute } from 'vue-router'
-import { useUserStore } from '../../store/user'
+import { useUserStore } from '../../store/User'
 const userStore = useUserStore()
 const route: any = useRoute()
+
+import { useGlobalStore } from '../../store/Global'
+const globalStore = useGlobalStore()
+globalStore.GlobalNavBarTitle = '搜索结果'
 
 // 加载中
 const loading = ref(true)

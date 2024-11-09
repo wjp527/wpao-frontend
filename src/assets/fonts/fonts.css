@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'LOGO';
+  src: url('./dazhiqiuyouxiuxuanshou.ttf');
+  /* src: url('./【谁能许我扶桑花期】.ttf') format('truetype'); */
+  /* src: url('./瀞zhiguzhangmingchao.otf'); */
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/* 汉仪瑞鹤 */
+
+@font-face {
+  font-family: 'SUBTITLE';
+  src: url('./汉仪瑞鹤.ttf') format('truetype');
+  /* src: url('./瀞zhiguzhangmingchao.otf'); */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'subtitle';
+  src: url('./【谁能许我扶桑花期】.ttf') format('truetype');
+  /* src: url('./瀞zhiguzhangmingchao.otf'); */
+  font-weight: normal;
+  font-style: normal;
+}

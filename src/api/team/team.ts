@@ -1,4 +1,4 @@
-import request from "../../utils/request";
+import request from "../../utils/request.ts";
 
 import { BASE_RESPONSE } from "../index.ts";
 import {

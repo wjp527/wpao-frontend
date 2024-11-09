@@ -1,4 +1,4 @@
-<template>
+<template> 
   <div class="Search">
     <form action="/">
       <van-search v-model="searchText" show-action placeholder="请输入搜索的标签" @search="onSearch" @cancel="onCancel" />
@@ -10,7 +10,7 @@
       <van-row :gutter="10">
         <div v-if="activeId.length == 0">请选择标签</div>
         <van-col span="4" v-for="item in activeId" :key="item">
-          <van-tag :show="show" closeable size="middle" type="primary" @close="close(item)">{{ item }}</van-tag>
+          <van-tag :show="show" closeable  type="primary" @close="close(item)">{{ item }}</van-tag>
         </van-col>
       </van-row>
     </div>
@@ -29,49 +29,53 @@
   </div>
 </template>
 <script lang="ts" setup name="Search">
-import { ref ,computed } from 'vue'
+import { ref ,computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useTagStore } from '../../store/Tag';
+const tagStore = useTagStore()
 
 const router = useRouter()
+
+import { useGlobalStore } from '../../store/Global'
+const globalStore = useGlobalStore()
+globalStore.GlobalNavBarTitle = '搜索标签'
  
 // 使用计算属性
 const disabledBtn = computed(() => {
   return !(activeId.value.length > 0)
 })
 
+const pageInfo =ref({
+  pageNum: 1,
+  pageSize: 100
+})
+
 // search
 // start
-const originTagList = ref([
-  {
-    text: '性别',
-    children: [
-      { text: '男', id: '男' },
-      { text: '女', id: '女' },
-      { text: '人妖', id: '人妖' },
-    ],
-  },
-  {
-    text: '语言',
-    children: [
-      { text: 'java', id: 'java' },
-      { text: 'c++', id: 'c++' },
-      { text: 'python', id: 'python' },
-    ],
-  },
-  {
-    text: '级别',
-    children: [
-      { text: '初级', id: 4 },
-      { text: '中级', id: 5 },
-      { text: '高级', id: 6 },
-      { text: '宗师', id: 7 },
-      { text: '王', id: 8 },
-    ],
-  },
-])
-
+const originTagList = ref([])
 let tagList = ref()
-tagList.value = JSON.parse(JSON.stringify(originTagList.value))
+const init =  async () => {
+ let res = await tagStore.listPage(pageInfo.value)
+ if(res == 200) {
+  originTagList.value = tagStore.tagList.map((item: any) => { 
+    item.text = item.tagName
+    item.id = item.tagName
+    item.children.forEach((child:any) => {
+      child.text = child.tagName
+      child.id = child.tagName
+    })
+    return item
+  })
+ 
+  tagList.value = JSON.parse(JSON.stringify(originTagList.value))
+ }
+}
+onMounted(() => {
+  init()
+})
+
+
+
 const searchText = ref('')
 
 const onSearch = (val: any) => {

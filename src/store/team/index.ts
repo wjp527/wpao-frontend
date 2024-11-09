@@ -19,20 +19,20 @@ import {
   // 解散队伍接口
   dissolveTeamAsync
 
-} from "../../api/team/team.ts";
+} from "../../api/Team/team.ts";
 
 // 请求体返回类型参数
-import type { BaserResponse } from "../type/index.ts";
-import { TeamListRequest, JoinTeamRequest } from "../../api/team/type.ts";
+import type { BaseResponse } from "../Type/index.ts";
+import { TeamListRequest, JoinTeamRequest } from "../../api/Team/type.ts";
 
 // 引入枚举
 import { TeamStatusEnum } from "../../enum/team/index.ts";
 
 export const useTeamStore: any = defineStore("team", () => {
   // 创建队伍
-  const addTeamInfo = ref<BaserResponse>()
+  const addTeamInfo = ref<BaseResponse>()
   const GetAddTeanAsync = async (payload: any) => {
-    let res: BaserResponse = await addTeanAsync(payload)
+    let res: BaseResponse = await addTeanAsync(payload)
     if (res.code === 0) {
       return 200
     } else {
@@ -67,7 +67,7 @@ export const useTeamStore: any = defineStore("team", () => {
   // 加入队伍接口
   // joinTeamAsync 
   const GetJoinTeamAsync = async (payload: JoinTeamRequest) => {
-    let res: BaserResponse = await joinTeamAsync(payload)
+    let res: BaseResponse = await joinTeamAsync(payload)
     console.log(res.description, 'payload');
     if (res.code === 0) {
       return 200
@@ -93,7 +93,7 @@ export const useTeamStore: any = defineStore("team", () => {
   // updateTeamAsync 
   const updateTeam = ref<any>({})
   const GetUpdateTeamAsync = async (payload: any) => {
-    let res: BaserResponse = await updateTeamAsync(payload)
+    let res: BaseResponse = await updateTeamAsync(payload)
     if (res.code === 0) {
       return 200
     } else {
@@ -131,7 +131,7 @@ export const useTeamStore: any = defineStore("team", () => {
   // 退出队伍接口
   // quitTeamAsync,
   const GetQuitTeamAsync = async (payload: any) => {
-    let res: BaserResponse = await quitTeamAsync(payload)
+    let res: BaseResponse = await quitTeamAsync(payload)
     if (res.code === 0) {
       return 200
     } else {
