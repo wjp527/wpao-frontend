@@ -27,6 +27,9 @@ import { Toast } from 'vant';
 // 引入字体样式
 import './assets/fonts/fonts.css'
 import './common/index.css'
+// 引入bytemd编辑器样式
+import "bytemd/dist/index.css";
+
 
 const app = createApp(App)
 app.component('Loading', Loading)

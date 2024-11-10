@@ -102,7 +102,24 @@ const router = createRouter({
       path: '/apply',
       name: 'Apply',
       component: () => import('../pages/Apply/index.vue')
-    }
+    },
+    {
+      path: '/blog',
+      name: 'Blog',
+      component: () => import('../pages/Blog/index.vue')
+    },
+    // ExampleView
+    {
+      path: '/exampleView',
+      name: 'ExampleView',
+      component: () => import('../pages/Blog/AddBlog/index.vue')
+    },
+    {
+      path: '/blogDetail',
+      name: 'BlogDetail',
+      component: () => import('../pages/Blog/BlogDetail/index.vue')
+    },
+
   ]
 })
 

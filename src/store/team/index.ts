@@ -151,6 +151,9 @@ export const useTeamStore: any = defineStore("team", () => {
     }
   }
 
+  // 获取某一只队伍的信息
+  const teamDetail: any = ref()
+
   return {
     // 创建队伍
     addTeamInfo,
@@ -186,7 +189,10 @@ export const useTeamStore: any = defineStore("team", () => {
     GetQuitTeamAsync,
 
     // 解散队伍接口
-    GetDissolveTeamAsync
+    GetDissolveTeamAsync,
+
+    // 进入队伍
+    teamDetail
   }
 },
   {

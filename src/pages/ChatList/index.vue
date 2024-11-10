@@ -58,7 +58,7 @@ const title = ref('好友申请')
 const loading = ref(false)
 const pageInfo = ref({
   pageNum: 1,
-  pageSize: 10
+  pageSize: 100
 })
 
 const listFriendPageList = ref()

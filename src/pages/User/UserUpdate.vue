@@ -11,6 +11,7 @@
       <van-cell title="性别" is-link :value="user.gender == 0 ? '男' : '女'" @click="editUser('gender', '性别', user.gender)" />
       <van-cell title="电话" is-link :value="user.phone" @click="editUser('phone', '电话', user.phone)" />
       <van-cell title="邮箱" is-link :value="user.email" @click="editUser('email', '邮箱', user.email)" />
+      <van-cell title="备注" is-link :value="user.remark" @click="editUser('remark', '备注', user.remark)" />
       <van-cell title="星球编号" :value="user.planetCode" />
       <van-cell title="注册时间" :value="user.createTime.toLocaleString()" />
     </template>

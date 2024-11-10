@@ -5,7 +5,7 @@
 
     <van-tabs v-model:active="active" @change="teamStatusChagne">
       <van-tab title="公开">
-        <van-card v-for="item in teamListByPublic" :tag="item.TeamStatusCN" :desc="item.description" :title="item.name" :thumb="item.teamPic">
+        <van-card v-for="item in teamListByPublic" :tag="item.TeamStatusCN" :desc="item.description" :title="item.name" :thumb="item.teamPic" @click="nextToBlog(item)">
           <template #price>
             <div class="flex">
               <van-tag plain type="primary">max: {{ item.maxNum }}</van-tag>
@@ -22,7 +22,7 @@
         </van-card>
       </van-tab>
       <van-tab title="加密">
-        <van-card v-for="item in teamListSecret" :tag="item.TeamStatusCN" :desc="item.description" :title="item.name" :thumb="item.teamPic">
+        <van-card v-for="item in teamListSecret" :tag="item.TeamStatusCN" :desc="item.description" :title="item.name" :thumb="item.teamPic"  @click="nextToBlog(item)">
           <template #price>
             <div class="flex">
               <van-tag plain type="primary">max: {{ item.maxNum }}</van-tag>
@@ -49,7 +49,7 @@
       </van-form>
     </van-dialog>
 
-    <van-floating-bubble v-model="offset" icon="plus" @click="onClick" axis="xy" magnetic="x" />
+    <van-floating-bubble v-model:offset="offset"  @click="onClick" magnetic="x" axis="xy" icon="plus"  />
   </div>
 </template>
 <script lang="ts" setup name="Team">
@@ -67,7 +67,7 @@ const teamStore = useTeamStore()
 
 const { userInfo } = storeToRefs(userStore)
 import router from '../../router'
-import { showToast, Toast } from 'vant'
+import { showToast } from 'vant'
 
 // 加载中
 const loading = ref(true)
@@ -106,7 +106,8 @@ const onSearch = async (val: string) => {
 const active = ref(0)
 
 // 添加队伍按钮
-const offset = ref({ y: 550 })
+
+const offset = ref({ x: 310, y: 570 })
 const onClick = () => {
   router.push('/team/add')
 }
@@ -221,6 +222,18 @@ const onSubmit = async () => {
     // showCenter.value = true
     showToast(res)
   }
+}
+
+// 进入到博客
+const nextToBlog = (item: any) => {
+  teamStore.teamDetail = item
+  console.log(123);
+  if(item.hasJoin == true) {
+    router.push('/blog')
+  } else {
+    showToast('请先加入队伍')
+  }
+  
 }
 onMounted(() => {
   initPublic()

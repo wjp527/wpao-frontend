@@ -1,20 +1,5 @@
-[
-  {
-    "children": [
-      {
-        "id": 0,
-        "isParent": 0,
-        "parentId": 0,
-        "remark": "",
-        "tagName": "",
-        "userId": 0
-      }
-    ],
-    "id": 0,
-    "isParent": 0,
-    "parentId": 0,
-    "remark": "",
-    "tagName": "",
-    "userId": 0
-  }
-]
+{
+  "blogId": 0,
+  "pageNum": 0,
+  "pageSize": 0
+}
