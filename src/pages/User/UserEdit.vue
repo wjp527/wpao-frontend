@@ -62,7 +62,7 @@ init()
 const afterRead = async (file: any) => {
   // 此时可以自行将文件上传至服务器
   const formData = new FormData()
-  console.log(file)
+ 
   formData.append('file', file.file)
   let res: any = await userStore.GetUserUploadFileAsync(formData)
   if (res === 200) {

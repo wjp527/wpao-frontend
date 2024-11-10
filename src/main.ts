@@ -19,6 +19,8 @@ import FirstTag from './components/AddButton/FirstTag.vue'
 // 添加二级标签
 import SecondTag from './components/AddButton/SecondTag.vue'
 import NavBar from './components/NavBar/index.vue'
+import AddApplyButton from './components/AddApplyButton/index.vue'
+import SendMessageButton from './components/SendMessageButton/index.vue'
 
 import { Toast } from 'vant';
 
@@ -32,6 +34,8 @@ app.component('ToggleSwitche', ToggleSwitche)
 app.component('FirstTag', FirstTag)
 app.component('SecondTag', SecondTag)
 app.component('NavBar', NavBar)
+app.component('AddApplyButton', AddApplyButton)
+app.component('SendMessageButton', SendMessageButton)
 
 app.use(router)
 app.use(store)

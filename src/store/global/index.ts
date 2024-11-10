@@ -15,4 +15,7 @@ export const useGlobalStore = defineStore("global", () => {
     lastSegment
   }
 
-})
+},
+  {
+    persist: true,
+  })

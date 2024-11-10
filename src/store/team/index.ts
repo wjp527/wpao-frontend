@@ -68,7 +68,7 @@ export const useTeamStore: any = defineStore("team", () => {
   // joinTeamAsync 
   const GetJoinTeamAsync = async (payload: JoinTeamRequest) => {
     let res: BaseResponse = await joinTeamAsync(payload)
-    console.log(res.description, 'payload');
+
     if (res.code === 0) {
       return 200
     } else {

@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Add: typeof import('./src/components/AddButton/add.vue')['default']
+    AddApplyButton: typeof import('./src/components/AddApplyButton/index.vue')['default']
     AddButton: typeof import('./src/components/AddButton/index.vue')['default']
     Button: typeof import('./src/components/Button/index.vue')['default']
     FirstTag: typeof import('./src/components/AddButton/FirstTag.vue')['default']
@@ -16,6 +17,7 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SecondTag: typeof import('./src/components/AddButton/SecondTag.vue')['default']
+    SendMessageButton: typeof import('./src/components/SendMessageButton/index.vue')['default']
     ToggleSwitche: typeof import('./src/components/ToggleSwitche/index.vue')['default']
     UserCardList: typeof import('./src/components/UserCardList/index.vue')['default']
     VanButton: typeof import('vant/es')['Button']

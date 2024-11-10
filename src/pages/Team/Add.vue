@@ -116,11 +116,11 @@ const openDatePicker = () => {
 }
 
 const changeExpireTime = (payload: any) => {
-  console.log(payload);
+ 
 }
 const onConfirm = ({ selectedValues }: { selectedValues: string[] }) => {
   selectedValues.push("00", "00", "00", "00")
-  console.log(selectedValues);
+ 
 
   let formattedDate = selectedValues.join('-')
 
@@ -136,7 +136,7 @@ const password = ref()
 // 只有加密，才会显示密码输入框
 const isShowPassword = ref(false)
 const changeTeamStatus = (payload: any) => {
-  console.log(payload);
+ 
   if(payload == '2') {
     isShowPassword.value = true
   } else {

@@ -87,6 +87,21 @@ const router = createRouter({
       path: '/welcome',
       name: 'Welcome',
       component: () => import('../pages/Welcome/index.vue')
+    },
+    {
+      path: '/chatList',
+      name: 'ChatList',
+      component: () => import('../pages/ChatList/index.vue')
+    },
+    {
+      path: '/chat',
+      name: 'Chat',
+      component: () => import('../pages/ChatList/Chat.vue')
+    },
+    {
+      path: '/apply',
+      name: 'Apply',
+      component: () => import('../pages/Apply/index.vue')
     }
   ]
 })

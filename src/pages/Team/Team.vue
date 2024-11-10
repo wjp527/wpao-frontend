@@ -155,7 +155,7 @@ const uploadTeam = (item: any) => {
 
 // 退出队伍
 const QuitTeam = async (item: any) => {
-  console.log(item)
+ 
   let res = await teamStore.GetQuitTeamAsync({
     teamId: item.id,
   })
@@ -183,13 +183,12 @@ const DissolveTeam = async (item: any) => {
 // 加入队伍
 let sercetObj: any = ref({})
 const joinTeam = async (item: any) => {
-  console.log(item)
+ 
   // 公开
   if (item.teamStatus == 0) {
     let res: any = await teamStore.GetJoinTeamAsync({
       teamId: item.id,
-    })
-    console.log(res)
+    }) 
     if (res == 200) {
       showToast('加入成功')
       initPublic()

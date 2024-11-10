@@ -33,8 +33,7 @@ const globalStore = useGlobalStore()
 globalStore.GlobalNavBarTitle = '登录'
 
 const userAccount = ref('')
-const userPassword = ref('')
-console.log(route.query?.redirect)
+const userPassword = ref('') 
 // 加载中
 const loading = ref(false)
 const onSubmit = async () => {
@@ -69,8 +68,7 @@ const onSubmit = async () => {
     // // 将时间差转换为天数
     const dayDifference = timeDifference / (1000 * 60 * 60 * 24)
     const dayDifferenceCreate = firstDifference / (1000 * 60)
-    console.log(dayDifferenceCreate);
-    console.log(dayDifference);
+  
     // 检查时间差是否大于1天 或者 第一次进入这个页面，相当于新用户只要在注册的时候小于5分钟，就可以进入welcome页面，进行选择标签
     if (dayDifference > 1 || dayDifferenceCreate < 5) {
       // 如果大于1天，执行操作 

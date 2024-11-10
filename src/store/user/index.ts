@@ -90,7 +90,6 @@ export const useUserStore = defineStore("user",
       if (res.code === 0) {
         userAvatarUrl.value = res.data
         filePic.value = res.data
-        console.log(filePic.value, '===');
         return 200
       } else {
         return res.description

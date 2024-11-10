@@ -19,8 +19,7 @@ request.interceptors.request.use(config => {
 
 // 配置响应拦截器
 request.interceptors.response.use(response => {
-  // 对响应数据做点什么 
-  console.log(response?.data.code == 40101);
+  // 对响应数据做点什么  
   if (response?.data.code == 40100) {
     const redirectUrl = window.location.href;
     window.location.href = `/login?redirect=${redirectUrl}`;

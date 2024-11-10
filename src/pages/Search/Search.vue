@@ -94,8 +94,7 @@ const onSearch = (val: any) => {
       }
     })
   }
-
-  console.log(tagList.value, 'tagList.value')
+ 
 }
 
 const onCancel = () => {

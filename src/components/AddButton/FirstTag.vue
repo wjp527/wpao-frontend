@@ -42,7 +42,7 @@
     ></path>
   </svg>
   <span class="now">now!</span>
-  <span class="play">Add</span>
+  <span class="play">{{ title }}</span>
 </button>
 
 
@@ -50,7 +50,14 @@
   </div>
 </template>
 <script lang="ts" setup name="FirstTag">
+defineEmits(['title'])
 
+defineProps({
+  title: {
+    type: String,
+    default: 'Play'
+  }
+})
 
 </script>
 

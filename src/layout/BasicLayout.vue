@@ -1,5 +1,5 @@
 <template>
-  <van-nav-bar :title="title" left-text="" left-arrow @click-left="onClickLeft" @click-right="onClickRight">
+  <van-nav-bar  left-text="" :title="title" left-arrow @click-left="onClickLeft" @click-right="onClickRight">
     <template #right>
       <van-icon name="search" size="18" />
     </template>
@@ -11,9 +11,10 @@
 
   <div class="Tabbar">
     <van-tabbar  route>
-      <van-tabbar-item  to="/" icon="home-o" name="index">主页</van-tabbar-item>
-      <van-tabbar-item  to="/team" icon="search" name="team">队伍</van-tabbar-item>
-      <van-tabbar-item  to="/user" icon="friends-o" name="user">个人</van-tabbar-item>
+      <van-tabbar-item  to="/" icon="home-o" name="index" @click="nextTo">主页</van-tabbar-item>
+      <van-tabbar-item  to="/chatList" icon="chat-o" name="chat"   @click="nextTo">聊天</van-tabbar-item>
+      <van-tabbar-item  to="/team" icon="search" name="team"   @click="nextTo">队伍</van-tabbar-item>
+      <van-tabbar-item  to="/user" icon="friends-o" name="user"   @click="nextTo">个人</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
@@ -26,7 +27,7 @@ const globalStore = useGlobalStore()
 
 const title = ref()
 title.value = globalStore.GlobalNavBarTitle
- 
+
 
 setInterval(() => {
   title.value = globalStore.GlobalNavBarTitle
@@ -38,6 +39,10 @@ const onClickLeft = () => history.back()
 // 跳转搜索页面
 const onClickRight = () => {
   router.push('/search')
+}
+
+const nextTo = () => {
+  globalStore.lastSegment = false
 }
 </script>
 

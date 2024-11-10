@@ -2,7 +2,7 @@
   <div class="UserEditTags">
     <van-sticky>
       <div class="top">
-        <FirstTag @click="addFirstTag"/> 
+        <FirstTag @click="addFirstTag" :title="title" /> 
       </div>
     </van-sticky>
 
@@ -53,6 +53,8 @@ const tagStore = useTagStore()
 const globalStore = useGlobalStore()
 globalStore.GlobalNavBarTitle = '更新标签'
 const originTagList: any = ref([])
+
+const title = "Add"
  
 const pageInfo = ref({
   pageNum: 1,
@@ -162,8 +164,7 @@ const editTag = (item: any, subItem: any) => {
   updateTag.value = item
   
   subItemTag.value = subItem 
-  updateTagText.value = subItem.tagName
-  // console.log(subItem,'subItem.value');
+  updateTagText.value = subItem.tagName 
  
 }
 const confirmUpdateTag = async () => {  
