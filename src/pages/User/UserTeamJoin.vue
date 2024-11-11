@@ -19,9 +19,13 @@
 import { onMounted, ref } from 'vue'
 
 import { useTeamStore } from '../../store/Team' 
+import { useGlobalStore } from '../../store/Global'
+
 import { showToast } from 'vant'
+
 const teamStore = useTeamStore() 
- 
+const globalStore = useGlobalStore()
+globalStore.GlobalNavBarTitle = '加入的队伍'
 
 const othersTeamList:any = ref([])
 const init = async () => {

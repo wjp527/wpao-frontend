@@ -18,13 +18,17 @@
 <script lang="ts" setup name="UserTeamCreate">
 import { onMounted, ref } from 'vue'
 
+// store
+import { storeToRefs } from 'pinia'
 import { useTeamStore } from '../../store/Team'
 import { useUserStore } from '../../store/User'
-import { storeToRefs } from 'pinia'
+import { useGlobalStore } from '../../store/Global'
+
 import { showToast } from 'vant'
 const teamStore = useTeamStore()
 const userStore = useUserStore()
-
+ const globalStore = useGlobalStore()
+globalStore.GlobalNavBarTitle = '创建的队伍'
 const { userInfo } = storeToRefs(userStore)
 
 const creatList:any = ref([])

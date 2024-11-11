@@ -26,15 +26,15 @@
 import { ref , reactive} from 'vue'
 import { showToast } from 'vant'
 
-import { useRoute , useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { useUserStore } from '../../store/User'
 import { useGlobalStore } from '../../store/Global'
-const route = useRoute()
+ 
 const router = useRouter()
 const userStore = useUserStore()
 
 const globalStore = useGlobalStore()
-globalStore.GlobalNavBarTitle = '登录'
+globalStore.GlobalNavBarTitle = '注册'
 
  
 
@@ -58,7 +58,7 @@ const validateForm = () => {
 
 const onSubmit = async () => {
   loading.value = true
-  let res = await userStore.GetUserRegisterAsync(userInfo)
+  let res:any = await userStore.GetUserRegisterAsync(userInfo)
 
   if (res === 200) {
     router.push('/login')

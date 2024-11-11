@@ -34,16 +34,18 @@ import { showToast } from 'vant'
 const route = useRoute()
 const router = useRouter()
 
-const userStore: any = useUserStore()
-const globalStore = useGlobalStore()
-globalStore.GlobalNavBarTitle = '修改信息'
-
 const editUser: any = ref({
   id: route.query.id as string,
   editKey: route.query.editKey as string,
   editName: route.query.editName as string,
   currentValue: route.query.currentValue as string,
 })
+
+const userStore: any = useUserStore()
+const globalStore = useGlobalStore()
+globalStore.GlobalNavBarTitle = '修改' + editUser.value.editName
+
+
 
 // 文件上传
 const fileValue: any = ref([])

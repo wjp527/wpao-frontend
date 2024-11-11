@@ -30,7 +30,7 @@ import { showToast } from 'vant'
 const router = useRouter()
 const userStore: any = useUserStore()
 const globalStore = useGlobalStore()
-globalStore.GlobalNavBarTitle = '个人中心'
+globalStore.GlobalNavBarTitle = '修改信息'
 
 const user: any = ref()
 // 修改用户信息
